@@ -1,0 +1,2 @@
+const String OPENAI_API_KEY = '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';
+const String GOOGLE_API_KEY = 'AIzaSyAUzZ77cvmLBxHK9RjVq5A1IV95md2DOow';
