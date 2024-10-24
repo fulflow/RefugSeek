@@ -10,6 +10,7 @@ import 'page_two.dart';
 import 'chat_page.dart';
 import 'main.dart';
 import 'package:flutter/services.dart';
+import 'ai.dart';
 // To load JSON file for custom map style
 
 class MapScreen extends StatefulWidget {
@@ -242,6 +243,16 @@ class _MapScreenState extends State<MapScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.medical_information),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DrugRecommendationApp()),
                   );
                 },
               ),

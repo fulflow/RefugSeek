@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'consts.dart';
+import 'Posting/login.dart';
+import 'page_two.dart';
+import 'map.dart';
+import 'chat_page.dart';
+import 'main.dart';
 
 void main() => runApp(DrugRecommendationApp());
 
@@ -17,7 +23,7 @@ class _DrugRecommendationAppState extends State<DrugRecommendationApp> {
   Future<void> getRecommendation(String description) async {
     final url = 'https://api-inference.huggingface.co/models/sd872346/gemma-2b-it-sum-drug_recommend';  // Correct API endpoint
     final headers = {
-      "Authorization": "Bearer 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",  // Replace with your Hugging Face API token
+      "Authorization": "Bearer HUGGINGFACE_TOKEN",  // Replace with your Hugging Face API token
       "Content-Type": "application/json"
     };
 
@@ -36,7 +42,7 @@ class _DrugRecommendationAppState extends State<DrugRecommendationApp> {
       } else {
         print('Error response: ${response.body}');
         setState(() {
-          _recommendation = 'Error fetching recommendation';
+          _recommendation = 'Please try again!';
         });
       }
     } catch (error) {
@@ -71,6 +77,87 @@ class _DrugRecommendationAppState extends State<DrugRecommendationApp> {
             SizedBox(height: 20),
             Text(_recommendation.isNotEmpty ? _recommendation : 'Enter your symptoms to get a recommendation.'),
           ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: darkBrown,  // Background color for footer
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),  // Padding inside the footer
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,  // Evenly space items
+            children: [
+              // Login Button Icon (Login action)
+              IconButton(
+                icon: const Icon(Icons.home),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyApp()),
+                  );
+                },
+              ),
+
+
+
+              IconButton(
+                icon: const Icon(Icons.post_add),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.search),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapScreen()),
+                  );
+                },
+              ),
+
+              // Resource Center Icon (Replace "Resource Center")
+              IconButton(
+                icon: const Icon(Icons.list),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const PageTwo()),
+                  );
+                },
+              ),
+
+              // Map Screen Icon (Replace "Map Screen")
+
+              // Mental Health Bot Icon (Replace "Mental Health Bot")
+              IconButton(
+                icon: const Icon(Icons.chat_bubble_outline),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.medical_information),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DrugRecommendationApp()),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

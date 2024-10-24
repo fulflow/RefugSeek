@@ -6,6 +6,7 @@ import 'Posting/login.dart';
 import 'chat_page.dart';
 import 'main.dart';
 import 'map.dart';
+import 'ai.dart';
 
 // Define your Resource class here (if not already done)
 class Resource {
@@ -136,6 +137,16 @@ class PageTwo extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.medical_information),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DrugRecommendationApp()),
                   );
                 },
               ),

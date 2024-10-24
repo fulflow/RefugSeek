@@ -7,6 +7,7 @@ import '../map.dart';
 import '../chat_page.dart';
 import '../main.dart';
 import '../consts.dart';
+import '../ai.dart';
 
 class ViewPostsPage extends StatefulWidget {
   const ViewPostsPage({Key? key}) : super(key: key);
@@ -258,6 +259,16 @@ class _ViewPostsPageState extends State<ViewPostsPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.medical_information),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DrugRecommendationApp()),
                   );
                 },
               ),

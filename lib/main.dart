@@ -264,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                          builder: (context) => DrugRecommendationApp (),// Define what happens when the icon is pressed
+                          builder: (context) => const AuthenticatorPage(),// Define what happens when the icon is pressed
                       ),
                       );
                     },
@@ -534,6 +534,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.medical_information),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DrugRecommendationApp()),
                   );
                 },
               ),

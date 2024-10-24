@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:image_picker/image_picker.dart';
 import 'main.dart';
+import 'ai.dart';
 import 'consts.dart';
 // Chat page that integrates Gemini API
 class ChatPage extends StatefulWidget {
@@ -123,6 +124,16 @@ class _ChatPageState extends State<ChatPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.medical_information),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DrugRecommendationApp()),
                   );
                 },
               ),

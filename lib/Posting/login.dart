@@ -14,6 +14,7 @@ import '../map.dart';
 import '../chat_page.dart';
 import '../main.dart';
 import '../consts.dart';
+import '../ai.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -339,6 +340,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.medical_information),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DrugRecommendationApp()),
                   );
                 },
               ),
