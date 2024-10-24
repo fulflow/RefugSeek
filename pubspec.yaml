@@ -29,8 +29,11 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
+
     sdk: flutter
+
   url_launcher: ^6.0.20
+  audioplayers: ^6.1.0
 
 
 
@@ -50,6 +53,11 @@ dependencies:
   cloud_firestore: ^5.4.0
   image_picker: ^0.8.1
   uuid: ^3.0.7
+  tflite_flutter: ^0.11.0
+  google_ml_kit: ^0.19.0
+
+
+
 
   google_maps_flutter: ^2.9.0 #idk if these are the right versions
   geolocator: ^12.0.0
@@ -57,6 +65,10 @@ dependencies:
   http: ^1.2.2
   dash_chat_2: ^0.0.18
   chat_gpt_sdk: ^3.0.7
+  google_generative_ai: ^0.4.6
+  flutter_gemini: ^2.0.5
+  flutter_web_plugins:     # Required for web support
+    sdk: flutter
 
 
 
@@ -77,6 +89,13 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/images/homepic.jpg
+    - assets/map_styles.json
+    - assets/images/placeholder.png
+    - assets/sounds/sosalarm.mp3
+    - assets/images/anchor.jpg
+
 
 
 

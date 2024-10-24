@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'Posting/view_posts.dart';
+import 'consts.dart';
+import 'Posting/login.dart';
+import 'chat_page.dart';
+import 'main.dart';
+import 'map.dart';
 
 // Define your Resource class here (if not already done)
 class Resource {
@@ -12,9 +18,13 @@ class Resource {
 
 // Sample data for recommendedResources
 final List<Resource> recommendedResources = [
-  Resource(title: 'United Nations', description: 'Description for resource 1', url: 'https://www.un.org/'),
-  Resource(title: 'American Red Cross', description: 'Description for resource 2', url: 'https://www.redcross.org/about-us/our-work/disaster-relief.html'),
-  // Add more resources as needed
+  Resource(title: 'United Nations', description: 'Global humanitarian aid organization providing services for displaced individuals worldwide.', url: 'https://www.un.org/'),
+  Resource(title: 'American Red Cross', description: 'Supports disaster relief and homeless services, focusing on emergency shelters and resources.', url: 'https://www.redcross.org/about-us/our-work/disaster-relief.html'),
+  Resource(title: 'Habitat for Humanity', description: 'Nonprofit helping individuals access affordable housing and employment opportunities.', url: 'https://www.habitat.org/'),
+  Resource(title: 'National Alliance to End Homelessness', description: 'Focuses on policy advocacy and programs to prevent and end homelessness.', url: 'https://endhomelessness.org/'),
+  Resource(title: 'Feeding America', description: 'Nationwide organization that provides food assistance and resources for homeless individuals.', url: 'https://www.feedingamerica.org/'),
+  Resource(title: 'Salvation Army', description: 'Offers shelter, meals, and job resources to people in need, including the unsheltered.', url: 'https://www.salvationarmyusa.org/'),
+  Resource(title: 'Job Corps', description: 'Offers free education and vocational training for young people, helping them secure jobs and housing.', url: 'https://www.jobcorps.gov/'),
 ];
 
 class PageTwo extends StatelessWidget {
@@ -24,33 +34,30 @@ class PageTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Resource Center', // Main title
-            style: TextStyle(fontSize: 20), // You can customize the font size here
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 4.0), // Add padding between title and subtitle
-            child: Text(
-              'Supporting displaced women finding jobs', // Subtitle
-              style: TextStyle(
-                fontSize: 14, // Smaller font for subtitle
-                color: Colors.black, // Adjust the color for visibility
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Resource Center',
+              style: TextStyle(fontSize: 20),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text(
+                'Supporting unsheltered individuals finding resources',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
       ),
 
-
-      body: SingleChildScrollView( // Make the page scrollable
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            // Map each resource to a Card widget
             ...recommendedResources.map((resource) => Card(
               margin: const EdgeInsets.all(10),
               child: ListTile(
@@ -62,12 +69,10 @@ class PageTwo extends StatelessWidget {
               ),
             )).toList(),
 
-            // "Want more resources?" button
             Padding(
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle button press (e.g., fetch more resources)
                   print("Want more resources? button pressed");
                 },
                 child: const Text('Want more resources?'),
@@ -76,10 +81,71 @@ class PageTwo extends StatelessWidget {
           ],
         ),
       ),
+
+      bottomNavigationBar: BottomAppBar(
+        color: darkBrown,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.home),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyApp()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.post_add),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.search),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapScreen()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.list),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const PageTwo()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.chat_bubble_outline),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
-  // Updated _launchURL method
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {

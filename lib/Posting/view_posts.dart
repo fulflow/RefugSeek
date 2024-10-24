@@ -1,6 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'login.dart';
+import '../page_two.dart';
+import '../map.dart';
+import '../chat_page.dart';
+import '../main.dart';
+import '../consts.dart';
 
 class ViewPostsPage extends StatefulWidget {
   const ViewPostsPage({Key? key}) : super(key: key);
@@ -187,6 +193,80 @@ class _ViewPostsPageState extends State<ViewPostsPage> {
           ),
         ],
       ),
+
+      bottomNavigationBar: BottomAppBar(
+        color: darkBrown,  // Background color for footer
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),  // Padding inside the footer
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,  // Evenly space items
+            children: [
+              // Login Button Icon (Login action)
+              IconButton(
+                icon: const Icon(Icons.home),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyApp()),
+                  );
+                },
+              ),
+
+
+
+              IconButton(
+                icon: const Icon(Icons.post_add),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.search),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapScreen()),
+                  );
+                },
+              ),
+
+              // Resource Center Icon (Replace "Resource Center")
+              IconButton(
+                icon: const Icon(Icons.list),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const PageTwo()),
+                  );
+                },
+              ),
+
+              // Map Screen Icon (Replace "Map Screen")
+
+              // Mental Health Bot Icon (Replace "Mental Health Bot")
+              IconButton(
+                icon: const Icon(Icons.chat_bubble_outline),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+
+
     );
   }
 }

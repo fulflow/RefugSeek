@@ -1,3 +1,6 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';  // Firestore import
+
 class Post {
   final String description;
   final String postId;
@@ -29,4 +32,19 @@ class Post {
     'city': city,  // Add city to JSON
     'state': state,  // Add state to JSON
   };
+
+  static Post fromSnap(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
+
+    return Post(
+      description: snapshot['description'],
+      postId: snapshot['postId'],
+      datePublished: (snapshot['datePublished'] as Timestamp).toDate(),
+      postUrl: snapshot['postUrl'],
+      latitude: snapshot['latitude'],
+      longitude: snapshot['longitude'],
+      city: snapshot['city'],
+      state: snapshot['state'],
+    );
+  }
 }

@@ -8,6 +8,12 @@ import 'package:myapp/Posting/image_store_methods.dart';
 import 'firebase_options.dart';
 import 'view_posts.dart';
 import 'package:geolocator/geolocator.dart';
+import 'login.dart';
+import '../page_two.dart';
+import '../map.dart';
+import '../chat_page.dart';
+import '../main.dart';
+import '../consts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,9 +30,12 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'RefugSeek',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: darkBrown),
+        useMaterial3: true,
+        primaryColor: darkBrown,
+        scaffoldBackgroundColor: softBeige,
       ),
       home: const MyHomePage(title: 'User State'),
     );
@@ -179,55 +188,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shelter and Service Finder'),
+        title: Text('Post Shelter or Service Information'),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Button: Go Find Shelters and Homes
-              ElevatedButton(
-                onPressed: () {
-                  // Navigate to a page that helps find shelters or homes
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ViewPostsPage(), // Replace with appropriate page
-                    ),
-                  );
-                },
-                child: const Text('Go Find Shelters and Homes'),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                  textStyle: TextStyle(fontSize: 18),
-                ),
-              ),
-              const SizedBox(height: 30),
-
-              // Button: Post Shelter or Service Near You
-              ElevatedButton(
-                onPressed: () {
-                  // Show the UI for posting an image (Shelter or service)
-                  _imageSelect(context);
-                },
-                child: const Text('Post Shelter or Service Near You'),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                  textStyle: TextStyle(fontSize: 18),
-                ),
-              ),
-
-              const SizedBox(height: 30),
-
-              // Only show the image posting UI if an image is selected
+              // Placeholder Image or Selected Image
               _file != null
                   ? Column(
                 children: [
                   _isLoading
                       ? const LinearProgressIndicator()
                       : const Padding(padding: EdgeInsets.only(top: 0)),
-
                   const Divider(),
                   SizedBox(
                     height: 300,
@@ -236,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: MemoryImage(_file!),
-                          fit: BoxFit.fill,
+                          fit: BoxFit.contain,  // Maintain aspect ratio
                           alignment: FractionalOffset.topCenter,
                         ),
                       ),
@@ -266,7 +240,108 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               )
-                  : Container(),
+                  : Column(
+                children: [
+                  SizedBox(
+                    height: 300,  // Specify your desired box height
+                    width: 300,   // Specify your desired box width
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/placeholder.png'), // Path to your placeholder image
+                          fit: BoxFit.contain // Shrink image to fit within the box while maintaining aspect ratio
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Text(
+                      'No image selected. Post an image of the shelter or service you want to share.',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 30),
+
+              // Button: Post Shelter or Service Near You
+              ElevatedButton(
+                onPressed: () {
+                  // Show the UI for posting an image (Shelter or service)
+                  _imageSelect(context);
+                },
+                child: const Text('Post Shelter or Service Near You'),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  textStyle: TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: darkBrown,  // Background color for footer
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),  // Padding inside the footer
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,  // Evenly space items
+            children: [
+              // Login Button Icon (Login action)
+              IconButton(
+                icon: const Icon(Icons.home),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyApp()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.post_add),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Login()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.search),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapScreen()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.list),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const PageTwo()),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.chat_bubble_outline),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChatPage()),
+                  );
+                },
+              ),
             ],
           ),
         ),
